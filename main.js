@@ -3,7 +3,8 @@ const sections = document.querySelectorAll("section");
 const nextBtn = document.querySelector(".next");
 const prevBtn = document.querySelector(".prev");
 const navButtons = document.querySelectorAll("header nav ul li");
-
+const slide1Bottom = document.querySelector('.effect-slide1.bottom ')
+const slide2Bottom = document.querySelector('.effect-slide2.bottom ')
 
 
 
@@ -49,6 +50,10 @@ function handleNextBtn() {
   sections.forEach((section, i) => {
     if (i === index) {
       toggleText(i, "show");
+
+      slide1Bottom.classList.remove('active')
+      slide2Bottom.classList.remove('active')
+
       section.scrollIntoView({ behavior: "smooth" });
     }
   });
@@ -64,7 +69,13 @@ function handlePrevBtn() {
   sections.forEach((section, i) => {
     if (i === index) {
       toggleText(i, "show");
-      section.scrollIntoView({ behavior: "smooth" });
+
+      slide1Bottom.classList.add('active')
+      slide2Bottom.classList.add('active')
+
+      setTimeout(() => {
+        section.scrollIntoView({ behavior: "smooth" });
+      }, 1000);
     }
   });
 }
@@ -120,3 +131,15 @@ navButtons.forEach((button, indexBtn) => {
     index = indexBtn;
   });
 });
+
+
+
+
+
+
+
+
+
+
+// Slide effect logic
+

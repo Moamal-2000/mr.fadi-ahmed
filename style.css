@@ -7,6 +7,7 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden;
 }
 
 header {
@@ -15,10 +16,10 @@ header {
   top: 0;
   background-color: #fff;
   width: 100%;
-  z-index: 1000;
   display: flex;
   align-items: center;
   padding: 20px;
+  z-index: 10000;
 }
 
 @media (max-width: 768px) {
@@ -144,4 +145,116 @@ section:nth-child(4) {
 .nav .prev {
   position: absolute;
   left: -100px;
+}
+
+
+
+
+/* Slide effect top */
+/* .effect-slide1.top {
+  position: absolute;
+  left: 0;
+  top: 100vh;
+  z-index: 10;
+  background-color: ##35017f;
+  width: 100vw;
+  height: 100vh;
+  animation: slide1-top 1.5s 0.5s 1 ease-out forwards;
+  -webkit-animation: slide1-top 1.5s 0.5s 1 ease-out forwards;
+}
+
+.effect-slide2.top {
+  position: absolute;
+  left: 0;
+  top: 100vh;
+  z-index: 10;
+  background-color: #fff;
+  width: 100vw;
+  height: 100vh;
+  animation: slide2-top 1.5s .7s 1 ease-in-out forwards;
+  -webkit-animation: slide2-top 1.5s .7s 1 ease-in-out forwards;
+}
+
+
+@keyframes slide1-top {
+  0% {
+    top: 100vh;
+  }
+
+  100% {
+    top: -100vh;
+  }
+}
+
+
+@keyframes slide2-top {
+  0% {
+    top: 100vh;
+  }
+
+  100% {
+    top: -100vh;
+  }
+}
+
+ */
+
+
+
+
+/* Slide effect bottom */
+.effect-slide1.bottom {
+  position: absolute;
+  left: 0;
+  bottom: 100vh;
+  z-index: 10;
+  background-color: #35017f;
+  width: 100vw;
+  height: 100vh;
+  animation: slide1-bottom 1.5s 0.5s 1 ease-out;
+  -webkit-animation: slide1-bottom 1.5s 0.5s 1 ease-out;
+  animation-play-state: paused;
+}
+
+.effect-slide1.bottom.active {
+  animation-play-state: running;
+}
+
+.effect-slide2.bottom {
+  position: absolute;
+  left: 0;
+  bottom: 100vh;
+  z-index: 10;
+  background-color: #fff;
+  width: 100vw;
+  height: 100vh;
+  animation: slide2-bottom 1.5s .7s ease-in-out;
+  -webkit-animation: slide2-bottom 1.5s .7s ease-in-out;
+  animation-play-state: paused;
+}
+
+.effect-slide2.bottom.active {
+  animation-play-state: running;
+}
+
+
+@keyframes slide1-bottom {
+  0% {
+    bottom: 100vh;
+  }
+
+  100% {
+    bottom: -100vh;
+  }
+}
+
+
+@keyframes slide2-bottom {
+  0% {
+    bottom: 100vh;
+  }
+
+  100% {
+    bottom: -100vh;
+  }
 }
