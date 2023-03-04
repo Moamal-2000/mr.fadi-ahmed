@@ -80,8 +80,18 @@ function handleWheel(e) {
   }
 
   setTimeout(() => e.deltaY > 0 ? nextBtn.click() : prevBtn.click(), 1000);
+
+  sections.forEach((section, i) => {
+    if (i === index) {
+      toggleText(i, "show");
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  })
+
   lastTime = currentTime;
 }
+
+
 
 
 
