@@ -114,8 +114,6 @@ function handlePrevBtn() {
 
 
 function handleWheel(e) {
-  e.preventDefault();
-
   const currentTime = new Date().getTime();
 
   if (isAnimating || currentTime - lastTime < animationDuration) {
@@ -138,7 +136,7 @@ function handleWheel(e) {
   isAnimating = true;
   setTimeout(() => {
     isAnimating = false;
-  }, animationDuration);
+  }, animationDuration + 1000);
 
   lastTime = currentTime;
 }
@@ -182,7 +180,7 @@ function handleSlideAnimation(direction, newIndex) {
 function handleNavButtonClick(indexBtn) {
   // If an animation is currently in progress, don't allow another checkbox change
   if (isAnimating || isNavAnimating) return;
-
+  
   isNavAnimating = true;
 
   // Find the index of the currently active section
