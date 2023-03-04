@@ -2,7 +2,7 @@
 const sections = document.querySelectorAll("section");
 const nextBtn = document.querySelector(".next");
 const prevBtn = document.querySelector(".prev");
-const navButtons = document.querySelectorAll('header nav ul li')
+const navButtons = document.querySelectorAll("header nav ul li");
 
 
 
@@ -13,9 +13,8 @@ const navButtons = document.querySelectorAll('header nav ul li')
 
 // Variables
 let index = 0;
-const animationDuration = 1600;
 let lastTime = 0;
-
+const animationDuration = 1600;
 
 
 
@@ -38,8 +37,9 @@ function toggleText(index, state) {
     });
   }
 }
-
 toggleText(0, "show");
+
+
 
 function handleNextBtn() {
   if (index > 2) return;
@@ -53,6 +53,8 @@ function handleNextBtn() {
     }
   });
 }
+
+
 
 function handlePrevBtn() {
   if (index < 1) return;
@@ -69,48 +71,34 @@ function handlePrevBtn() {
 
 
 
+function handleWheel(e) {
+  const currentTime = new Date().getTime();
+
+  if (currentTime - lastTime < animationDuration) {
+    e.preventDefault();
+    return;
+  }
+
+  setTimeout(() => e.deltaY > 0 ? nextBtn.click() : prevBtn.click(), 1000);
+  lastTime = currentTime;
+}
+
 
 
 
 
 // Events
 nextBtn.addEventListener("click", () => handleNextBtn());
-
-
-
 prevBtn.addEventListener("click", () => handlePrevBtn());
 
 
 
-window.addEventListener("wheel", (e) => {
-    const delta = e.deltaY;
-    const currentTime = new Date().getTime();
-
-    if (currentTime - lastTime < animationDuration) {
-      e.preventDefault();
-      return;
-    }
-
-    if (delta > 0) {
-      console.log('Yes');
-      const nextBtnClick = new Event("click");
-      nextBtn.dispatchEvent(nextBtnClick);
-    } else {
-      console.log('No');
-      const prevBtnClick = new Event("click");
-      prevBtn.dispatchEvent(prevBtnClick);
-    }
-    lastTime = currentTime;
-  },
-  { passive: false }
-);
-
-
+window.addEventListener("wheel", (e) => handleWheel(e), { passive: false });
 
 navButtons.forEach((button, indexBtn) => {
-  button.addEventListener('click', () => {
+  button.addEventListener("click", () => {
     toggleText(index, "hide");
-  
+
     index++;
     sections.forEach((section, i) => {
       if (indexBtn === i) {
@@ -118,7 +106,7 @@ navButtons.forEach((button, indexBtn) => {
         section.scrollIntoView({ behavior: "smooth" });
       }
     });
-    
-    index = indexBtn
-  })
-})
+
+    index = indexBtn;
+  });
+});
