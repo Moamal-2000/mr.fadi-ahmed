@@ -76,11 +76,13 @@ function handlePrevBtn() {
 // Events
 nextBtn.addEventListener("click", () => handleNextBtn());
 
+
+
 prevBtn.addEventListener("click", () => handlePrevBtn());
 
-window.addEventListener(
-  "wheel",
-  (e) => {
+
+
+window.addEventListener("wheel", (e) => {
     const delta = e.deltaY;
     const currentTime = new Date().getTime();
 
@@ -90,9 +92,11 @@ window.addEventListener(
     }
 
     if (delta > 0) {
+      console.log('Yes');
       const nextBtnClick = new Event("click");
       nextBtn.dispatchEvent(nextBtnClick);
     } else {
+      console.log('No');
       const prevBtnClick = new Event("click");
       prevBtn.dispatchEvent(prevBtnClick);
     }
@@ -100,7 +104,6 @@ window.addEventListener(
   },
   { passive: false }
 );
-
 
 
 
