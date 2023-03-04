@@ -106,7 +106,6 @@ window.addEventListener(
 
 navButtons.forEach((button, indexBtn) => {
   button.addEventListener('click', () => {
-    console.log(index);
     toggleText(index, "hide");
   
     index++;
