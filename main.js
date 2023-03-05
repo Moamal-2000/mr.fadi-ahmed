@@ -77,7 +77,7 @@ function handleNextBtn() {
       }, 2000);
 
       setTimeout(() => {
-        section.scrollIntoView({ behavior: "auto" });
+        section.scrollIntoView({ behavior: "smooth" });
       }, 800);
     }
   });
@@ -105,7 +105,7 @@ function handlePrevBtn() {
       }, 2000);
 
       setTimeout(() => {
-        section.scrollIntoView({ behavior: "auto" });
+        section.scrollIntoView({ behavior: "smooth" });
       }, 800);
     }
   });
@@ -169,7 +169,7 @@ function handleSlideAnimation(direction, newIndex) {
       }, 2000);
 
       setTimeout(() => {
-        section.scrollIntoView({ behavior: "auto" });
+        section.scrollIntoView({ behavior: "smooth" });
       }, 800);
     }
   });

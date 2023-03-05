@@ -148,7 +148,7 @@ section:nth-child(4) {
 
 
 /* Slide effect top */
-.effect-slide1.top {
+/* .effect-slide1.top {
   position: absolute;
   left: 0;
   top: 100vh;
@@ -159,8 +159,8 @@ section:nth-child(4) {
 }
 
 .effect-slide1.top.active {
-  animation: slide1-top 1.5s 1 ease-in-out;
-  -webkit-animation: slide1-top 1.5s 1 ease-in-out;
+  animation: slide1-top 1.3s 1 ease-in-out;
+  -webkit-animation: slide1-top 1.3s 1 ease-in-out;
 }
 
 @keyframes slide1-top {
@@ -184,8 +184,8 @@ section:nth-child(4) {
 }
 
 .effect-slide2.top.active {
-  animation: slide2-top 1.7s .3s ease-in-out;
-  -webkit-animation: slide2-top 1.7s .3s ease-in-out;
+  animation: slide2-top 1s .5s ease-in-out;
+  -webkit-animation: slide2-top 1s .5s ease-in-out;
 }
 
 @keyframes slide2-top {
@@ -196,7 +196,7 @@ section:nth-child(4) {
   100% {
     top: -100vh;
   }
-}
+} */
 
 
 
@@ -218,8 +218,8 @@ section:nth-child(4) {
 }
 
 .effect-slide1.bottom.active {
-  animation: slide1-bottom 1.7s 1 ease-in-out;
-  -webkit-animation: slide1-bottom 1.7s 1 ease-in-out;
+  animation: slide1-bottom 1.3s 1 ease-in-out;
+  -webkit-animation: slide1-bottom 1.3s 1 ease-in-out;
 }
 
 @keyframes slide1-bottom {
@@ -246,8 +246,8 @@ section:nth-child(4) {
 }
 
 .effect-slide2.bottom.active {
-  animation: slide2-bottom 1.5s .5s ease-in-out;
-  -webkit-animation: slide2-bottom 1.5s .5s ease-in-out;
+  animation: slide2-bottom 1s .5s ease-in-out;
+  -webkit-animation: slide2-bottom 1s .5s ease-in-out;
 }
 
 @keyframes slide2-bottom {
