@@ -85,34 +85,6 @@ function handleNextBtn() {
 
 
 
-function handlePrevBtn() {
-  if (isAnimating || index < 1) return;
-  isAnimating = true;
-
-  toggleText(index, "hide");
-
-  index--;
-  sections.forEach((section, i) => {
-    if (i === index) {
-      toggleText(i, "show");
-
-      slide1Bottom.classList.add("active");
-      slide2Bottom.classList.add("active");
-      setTimeout(() => {
-        slide1Bottom.classList.remove("active");
-        slide2Bottom.classList.remove("active");
-        isAnimating = false;
-      }, 2000);
-
-      setTimeout(() => {
-        section.scrollIntoView({ behavior: "smooth" });
-      }, 800);
-    }
-  });
-}
-
-
-
 function handleWheel(e) {
   const currentTime = new Date().getTime();
 
@@ -215,7 +187,6 @@ function handleNavButtonClick(indexBtn) {
 
 // Events
 nextBtn.addEventListener("click", () => handleNextBtn());
-prevBtn.addEventListener("click", () => handlePrevBtn());
 window.addEventListener("wheel", (e) => handleWheel(e), { passive: false });
 
 navButtons.forEach((button, indexBtn) => {
