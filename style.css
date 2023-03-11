@@ -23,9 +23,9 @@ header {
 
 @media (max-width: 768px) {
   header {
-    padding: 10px;
-    flex-direction: column;
-    gap: 20px;
+      padding: 10px;
+      flex-direction: column;
+      gap: 20px;
   }
 }
 
@@ -37,14 +37,13 @@ header nav ul {
 
 @media (max-width: 768px) {
   header nav ul {
-    gap: 10px;
-    margin-left: 0;
-    padding: 0;
+      gap: 10px;
+      margin-left: 0;
+      padding: 0;
   }
 }
 
-header nav ul li,
-.nav button {
+header nav ul li {
   border: none;
   background-color: #d4d4d4;
   padding: 8px 14px;
@@ -64,8 +63,7 @@ header nav ul li,
   -o-transition: color 0.3s, opacity 0.3s;
 }
 
-header nav ul li:hover,
-.nav button:hover {
+header nav ul li:hover {
   opacity: 0.8;
 }
 
@@ -79,15 +77,86 @@ main {
   overflow: hidden;
 }
 
-section {
-  height: 100vh;
-  position: relative;
+/* style the scroll icon */
+.my-custom_scroll-icon {
+  width: 100%;
+  position: absolute;
+  bottom: 40px;
+  text-align: center;
+  z-index: 2;
 }
 
-section img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.my-custom_scroll-icon span.next {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -23%);
+  width: 26px;
+  height: 44px;
+  border: 2px solid #fff;
+  border-radius: 13px;
+  transition: all .3s ease;
+  cursor: pointer;
+}
+
+.my-custom_scroll-icon span.next::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  top: 6px;
+  border-radius: 50%;
+  background-color: #b3b3b3;
+  left: 50%;
+  margin-left: -3px;
+  animation: jumpInfinite 1.2s infinite;
+}
+
+@keyframes jumpInfinite {
+  0% {
+      top: 6px;
+  }
+
+  50% {
+      top: 10px;
+  }
+
+  100% {
+      top: 6px;
+  }
+}
+
+.my-custom_scroll-icon span.next:hover {
+  background-color: #fff;
+}
+
+/* stop animation when hover */
+.my-custom_scroll-icon span.next:hover::after {
+  animation-play-state: paused;
+}
+
+.my-custom_scroll-icon p {
+  position: relative;
+  margin-bottom: 0;
+  color: #35017f;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  transition: all .3s ease;
+  user-select: none;
+  z-index: -1;
+}
+
+.my-custom_scroll-icon span.next:hover+p {
+  opacity: 0;
+  letter-spacing: 5px;
+}
+
+/* style the scroll icon ends*/
+
+section {
+  height: 100vh;
+  overflow-y: auto;
+  position: relative;
 }
 
 section:nth-child(1) {
@@ -134,18 +203,9 @@ section:nth-child(4) {
 
 .text h3,
 .text p {
-  color: #fff;
+  /* color: #fff; */
   font-size: 24px;
 }
-
-.nav {
-  left: 20px;
-  top: 20px;
-}
-
-
-
-
 
 /* Slide effect top */
 .effect-slide1.top {
@@ -165,11 +225,11 @@ section:nth-child(4) {
 
 @keyframes slide1-top {
   0% {
-    top: 100vh;
+      top: 100vh;
   }
 
   100% {
-    top: -100vh;
+      top: -100vh;
   }
 }
 
@@ -178,7 +238,7 @@ section:nth-child(4) {
   left: 0;
   top: 100vh;
   z-index: 10;
-  background-color: #fff;
+  background-color: #d4d4d4;
   width: 100vw;
   height: 100vh;
 }
@@ -190,21 +250,13 @@ section:nth-child(4) {
 
 @keyframes slide2-top {
   0% {
-    top: 100vh;
+      top: 100vh;
   }
 
   100% {
-    top: -100vh;
+      top: -100vh;
   }
 }
-
-
-
-
-
-
-
-
 
 /* Slide effect bottom */
 .effect-slide1.bottom {
@@ -224,23 +276,20 @@ section:nth-child(4) {
 
 @keyframes slide1-bottom {
   0% {
-    bottom: 100vh;
+      bottom: 100vh;
   }
 
   100% {
-    bottom: -100vh;
+      bottom: -100vh;
   }
 }
-
-
-
 
 .effect-slide2.bottom {
   position: absolute;
   left: 0;
   bottom: 100vh;
   z-index: 10;
-  background-color: #fff;
+  background-color: #d4d4d4;
   width: 100vw;
   height: 100vh;
 }
@@ -252,10 +301,10 @@ section:nth-child(4) {
 
 @keyframes slide2-bottom {
   0% {
-    bottom: 100vh;
+      bottom: 100vh;
   }
 
   100% {
-    bottom: -100vh;
+      bottom: -100vh;
   }
 }

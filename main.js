@@ -3,54 +3,35 @@
 // Selectors
 const sections = document.querySelectorAll("section");
 const nextBtn = document.querySelector(".next");
-const prevBtn = document.querySelector(".prev");
+const customIcon = document.querySelector(".my-custom_scroll-icon");
 const navButtons = document.querySelectorAll("header nav ul li");
 const slide1Bottom = document.querySelector(".effect-slide1.bottom");
 const slide2Bottom = document.querySelector(".effect-slide2.bottom");
 const slide1Top = document.querySelector(".effect-slide1.top");
 const slide2Top = document.querySelector(".effect-slide2.top");
 
-
-
-
-
-
-
-
+/*+++++++++++++++++++++++++++*/
 
 // Variables
 let index = 0;
 let isAnimating = false;
 let isNavAnimating = false;
 let lastTime = new Date().getTime();
+let switchWheelEvent = false;
+let confirmSwitchSection = 0;
 const animationDuration = 1600;
 
-
-
-
-
-
-
+/*+++++++++++++++++++++++++++*/
 
 // Functions
 function toggleText(index, state) {
-  if (state === "show") {
-    sections.forEach((section, i) => {
-      if (i === index) {
-        section.querySelector(".text").classList.add("show");
-      }
-    });
-  } else {
-    sections.forEach((section, i) => {
-      if (i === index) {
-        section.querySelector(".text").classList.remove("show");
-      }
-    });
-  }
+  sections[index]
+    .querySelector(".text")
+    .classList.toggle("show", state === "show");
 }
 toggleText(0, "show");
 
-
+/*+++++++++++++++++++++++++++*/
 
 function handleNextBtn() {
   if (isAnimating || index > 2) return;
@@ -80,40 +61,39 @@ function handleNextBtn() {
         section.scrollIntoView({ behavior: "smooth" });
       }, 800);
     }
+
+    showHideIcon();
   });
 }
 
-
+/*+++++++++++++++++++++++++++*/
 
 function handleWheel(e) {
-  const currentTime = new Date().getTime();
+  if (switchWheelEvent) {
+    confirmSwitchSection++;
+    if (confirmSwitchSection === 15) {
+      confirmSwitchSection = 0;
+      const currentTime = new Date().getTime();
+      if (isAnimating || currentTime - lastTime < animationDuration) return;
+      isAnimating = true;
 
-  if (isAnimating || currentTime - lastTime < animationDuration) {
-    return;
+      const direction = e.deltaY > 0 ? "top" : "bottom";
+      let newIndex = index + (direction === "top" ? 1 : -1);
+
+      if (newIndex < 0 || newIndex >= sections.length) {
+        newIndex = 0;
+        isAnimating = false;
+        return;
+      }
+
+      lastTime = currentTime;
+      handleSlideAnimation(direction, newIndex);
+      showHideIcon();
+    }
   }
-
-  isAnimating = true;
-
-  const direction = e.deltaY > 0 ? "top" : "bottom";
-  const newIndex = index + (direction === "top" ? 1 : -1);
-
-  // If the new index is outside of the section range, stop the navigation animation.
-  if (newIndex >= sections.length || newIndex < 0) {
-    isAnimating = false;
-    return;
-  }
-
-  handleSlideAnimation(direction, newIndex);
-
-  isAnimating = true;
-  setTimeout(() => {
-    isAnimating = false;
-  }, animationDuration + 1000);
-
-  lastTime = currentTime;
 }
 
-
+/*+++++++++++++++++++++++++++*/
 
 function handleSlideAnimation(direction, newIndex) {
   const slide1 = direction === "top" ? slide1Top : slide1Bottom;
@@ -147,13 +127,14 @@ function handleSlideAnimation(direction, newIndex) {
   });
 }
 
-
+/*+++++++++++++++++++++++++++*/
 
 function handleNavButtonClick(indexBtn) {
   // If an animation is currently in progress, don't allow another checkbox change
   if (isAnimating || isNavAnimating) return;
-  
+
   isNavAnimating = true;
+  switchWheelEvent = true;
 
   // Find the index of the currently active section
   const activeIndex = Array.from(navButtons).findIndex((navButton) =>
@@ -174,16 +155,16 @@ function handleNavButtonClick(indexBtn) {
     isNavAnimating = false;
     isAnimating = false;
   }, 2000);
+
+  showHideIcon();
 }
 
-
-
-
-
-
-
-
-
+/*+++++++++++++++++++++++++++*/
+/* show hide scroll icon depending of last section*/
+function showHideIcon() {
+  setTimeout(() =>customIcon.style.display = index === sections.length - 1 ? "none" : "block", 1000);
+}
+/*+++++++++++++++++++++++++++*/
 
 // Events
 nextBtn.addEventListener("click", () => handleNextBtn());
@@ -192,5 +173,50 @@ window.addEventListener("wheel", (e) => handleWheel(e), { passive: false });
 navButtons.forEach((button, indexBtn) => {
   button.addEventListener("click", () => {
     handleNavButtonClick(indexBtn);
+  });
+});
+
+
+
+
+sections.forEach((section, i) => {
+  section.addEventListener("scroll", () => {
+    // Check if its first section
+    if (section.scrollTop === 0 && i === 0) return;
+
+
+    // Check if scroll bar is on the top of the section
+    if (section.scrollTop === 0) {
+      switchWheelEvent = true;
+      window.addEventListener("wheel", (e) => handleWheel(e), {
+        passive: false,
+      });
+      return;
+    } else switchWheelEvent = false;
+
+
+    // Make last section switch to previous section
+    if (sections.length - 1 === i) {
+      if (section.scrollTop === 0) {
+        switchWheelEvent = true;
+        window.addEventListener("wheel", (e) => handleWheel(e), {
+          passive: false,
+        });
+        return;
+      } else switchWheelEvent = false;
+      switchWheelEvent = false;
+      return;
+    }
+
+
+    // Check if its last section
+    if (section.scrollHeight - 1 < section.scrollTop + section.clientHeight) {
+      switchWheelEvent = true;
+      window.addEventListener("wheel", (e) => handleWheel(e), {
+        passive: false,
+      });
+    } else switchWheelEvent = false;
+
+    section.scrollIntoView({ behavior: "smooth" });
   });
 });
